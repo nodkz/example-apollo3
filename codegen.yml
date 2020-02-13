@@ -1,0 +1,24 @@
+schema: schema.graphql
+documents: 'src/**/*.graphql'
+generates:
+  src/__generated__/types.ts:
+    - typescript
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      folder: __generated__
+      extension: .tsx
+      baseTypesPath: __generated__/types.ts
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      namingConvention: keep
+      nonOptionalTypename: true
+      dedupeOperationSuffix: true
+      omitOperationSuffix: true
+      withComponent: false
+      withHooks: true
+      withHOC: false
+      reactApolloVersion: 3
+      # documentMode: documentNode

@@ -1,0 +1,16 @@
+query Home {
+  viewer {
+    employeeList {
+      _id
+      firstName
+      subordinates {
+        _id
+        firstName
+      }
+      chief {
+        _id
+        firstName
+      }
+    }
+  }
+}
