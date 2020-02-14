@@ -22,9 +22,21 @@ const customFetch = (uri: string, options: any) => {
 
 const cacheConfig = {
   typePolicies: {
-    Employee: {
-      keyFields: false, // ['_id', 'firstName'],
+    Order: {
+      keyFields: ['orderID'],
     },
+    // Employee: {
+    //   keyFields: false, // ['_id', 'firstName'],
+    // },
+    // Customer: {
+    //   keyFields: ['customerID'],
+    // },
+    // CustomerAddress: {
+    //   keyFields: ['city'],
+    // },
+    // Employee: {
+    //   keyFields: ['lastName'],
+    // },
   },
 } as InMemoryCacheConfig;
 
@@ -131,6 +143,9 @@ function initApolloClient(
   if (!apolloClientInBrowser) {
     apolloClientInBrowser = createApolloClient(initialState, {}, ctx);
   }
+
+  if (typeof window !== 'undefined') (window as any).ac = apolloClientInBrowser;
+
   return apolloClientInBrowser;
 }
 
