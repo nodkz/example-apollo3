@@ -36,7 +36,7 @@ export function useQuery<TData = any, TVariables = Apollo.OperationVariables>(
       if (options?.onCompleted) options.onCompleted(data);
     },
     onError: (e) => {
-      const opts = getNotificationOpts(options?.notifications?.onError);
+      const opts = getNotificationOpts(options?.notifications?.onError) ?? {};
       if (opts) {
         if (e.graphQLErrors) {
           e.graphQLErrors.forEach((err) => {
@@ -71,8 +71,8 @@ export function useMutation<TData = any, TVariables = Apollo.OperationVariables>
   return Apollo.useMutation<TData, TVariables>(mutation, {
     ...options,
     onCompleted: (data) => {
-      const opts = getNotificationOpts(options?.notifications?.onCompleted);
-      if (opts !== false) {
+      const opts = getNotificationOpts(options?.notifications?.onCompleted) ?? {};
+      if (opts) {
         notification.open({
           message: opts?.title || 'Операция успешно выполнена',
           description: opts?.description,
@@ -82,7 +82,7 @@ export function useMutation<TData = any, TVariables = Apollo.OperationVariables>
       if (options?.onCompleted) options.onCompleted(data);
     },
     onError: (e) => {
-      const opts = getNotificationOpts(options?.notifications?.onError);
+      const opts = getNotificationOpts(options?.notifications?.onError) ?? {};
       if (opts) {
         if (e.graphQLErrors) {
           e.graphQLErrors.forEach((err) => {
@@ -107,9 +107,9 @@ export function useMutation<TData = any, TVariables = Apollo.OperationVariables>
 
 function getNotificationOpts(
   opts?: NotificationOptions | boolean | string
-): NotificationOptions | false {
+): NotificationOptions | null {
   if (opts === true) return {};
-  else if (!opts) return false;
+  else if (!opts) return null;
   else if (typeof opts === 'string')
     return {
       title: opts,

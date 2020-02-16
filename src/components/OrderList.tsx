@@ -3,6 +3,7 @@ import { useOrderDeleteMutation } from './__generated__/OrderDeleteMutation';
 import { Table, Popconfirm } from 'antd';
 import { PaginationConfig } from 'antd/lib/table';
 import { useRouter } from 'next/router';
+import { OrderListEditableFreight } from './OrderListEditableFreight';
 
 export function OrderList() {
   const router = useRouter();
@@ -45,6 +46,7 @@ export function OrderList() {
       onChange={onChange}
       expandedRowRender={expandedRowRender}
       rowKey="orderID"
+      rowClassName={() => 'editable-row'}
       columns={[
         {
           title: 'OrderID',
@@ -66,6 +68,11 @@ export function OrderList() {
         {
           title: 'Freight',
           dataIndex: 'freight',
+          width: '150px',
+          render: (t, record) => {
+            // return record.freight;
+            return <OrderListEditableFreight record={record} />;
+          },
         },
         {
           title: 'Operations',

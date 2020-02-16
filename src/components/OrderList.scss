@@ -1,0 +1,30 @@
+.ant-table-thead tr th {
+  position: sticky;
+  top: 0;
+}
+
+.editable-row:hover {
+  .tableFreightCell {
+    font-weight: 600;
+    color: #1890ff;
+    cursor: pointer;
+    &:after {
+      content: ' ✏️'
+    }
+  }
+}
+
+.tableFreightEdit {
+  .anticon {
+    font-size: 20px;
+    padding: 0 0 0 5px;
+  }
+  
+  .anticon-check-circle, .anticon-close-circle {
+    cursor: pointer;
+  }
+
+  .intInput {
+    width: 60px;
+  }
+}

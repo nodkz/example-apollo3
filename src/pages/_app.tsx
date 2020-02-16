@@ -53,6 +53,15 @@ export default function App({ Component, pageProps }) {
           <Menu.Item key="/reset">
             <a onClick={resetCache}>Reset cache</a>
           </Menu.Item>
+          <Menu.Item key="/api">
+            <a
+              href="https://graphql-compose.herokuapp.com/northwind-altair/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              API
+            </a>
+          </Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: '0 50px' }}>

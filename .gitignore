@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# __generated__  ☝️☝️☝️ for demo purposes we don't ignore generated files. Should be ignored in regular repos.
+
 # dependencies
 node_modules
 /.pnp
@@ -29,7 +31,6 @@ yarn-error.log*
 
 .next
 
-__generated__
 .yarn-cache
 
 tsconfig.build.tsbuildinfo
