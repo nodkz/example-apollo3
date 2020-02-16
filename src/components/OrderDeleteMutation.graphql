@@ -1,0 +1,7 @@
+mutation OrderDeleteMutation($filter: FilterRemoveOneOrderInput!) {
+  removeOrder(filter: $filter) {
+    record {
+      orderID
+    }
+  }
+}

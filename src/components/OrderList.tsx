@@ -1,14 +1,20 @@
-import { useOrderListQuery, OrderRow_orderFragment } from './__generated__/OrderList';
-import { Table } from 'antd';
+import { useOrderListQuery, OrderRow_orderFragment } from './__generated__/OrderListQuery';
+import { useOrderDeleteMutation } from './__generated__/OrderDeleteMutation';
+import { Table, Popconfirm } from 'antd';
 import { PaginationConfig } from 'antd/lib/table';
 import { useRouter } from 'next/router';
 
 export function OrderList() {
   const router = useRouter();
-  const { loading, data } = useOrderListQuery({
+  const { loading, data, refetch } = useOrderListQuery({
     variables: {
       page: parseInt(router.query?.page as any) || 1,
       perPage: parseInt(router.query?.perPage as any) || 10,
+    },
+  });
+  const [orderDelete] = useOrderDeleteMutation({
+    notifications: {
+      onCompleted: 'Запись успешно удалена!',
     },
   });
 
@@ -60,6 +66,24 @@ export function OrderList() {
         {
           title: 'Freight',
           dataIndex: 'freight',
+        },
+        {
+          title: 'Operations',
+          render: (t, record) => {
+            return (
+              <Popconfirm
+                title="Sure to delete?"
+                onConfirm={async () => {
+                  await orderDelete({
+                    variables: { filter: { orderID: record.orderID } },
+                  });
+                  refetch();
+                }}
+              >
+                <a>Delete</a>
+              </Popconfirm>
+            );
+          },
         },
       ]}
     />

@@ -24,6 +24,7 @@ fragment OrderList_pagination on OrderPagination {
 }
 
 fragment OrderRow_order on Order {
+  _id
   orderID
   orderDate
   customerID
