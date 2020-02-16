@@ -21,4 +21,5 @@ generates:
       withHooks: true
       withHOC: false
       reactApolloVersion: 3
+      apolloReactHooksImportFrom: 'app/utils/apolloHooks'
       # documentMode: documentNode
