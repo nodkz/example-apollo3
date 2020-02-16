@@ -129,7 +129,7 @@ export function withApollo(PageComponent: NextComponentType<any, any, any>, { ss
 
 let apolloClientInBrowser: ApolloClient<any> | null = null;
 
-function initApolloClient(
+export function initApolloClient(
   initialState: Record<string, any> = {},
   fetchOptions: Record<string, any> = {},
   ctx?: NextPageContext
