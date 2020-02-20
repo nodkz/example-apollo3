@@ -1,18 +1,24 @@
-import { useOrderListQuery, OrderRow_orderFragment } from './__generated__/OrderListQuery';
+import {
+  useOrderListQuery,
+  OrderRow_orderFragment,
+  OrderListQueryDocument,
+} from './__generated__/OrderListQuery';
 import { useOrderDeleteMutation } from './__generated__/OrderDeleteMutation';
 import { Table, Popconfirm } from 'antd';
 import { PaginationConfig } from 'antd/lib/table';
 import { useRouter } from 'next/router';
 import { OrderListEditableFreight } from './OrderListEditableFreight';
 import { useOrderUpdateSubscription } from './__generated__/OrderUpdateSubscription';
+import { useOrderDeleteSubscription } from './__generated__/OrderDeleteSubscription';
 
 export function OrderList() {
   const router = useRouter();
+  const variables = {
+    page: parseInt(router.query?.page as any) || 1,
+    perPage: parseInt(router.query?.perPage as any) || 10,
+  };
   const { loading, data, refetch } = useOrderListQuery({
-    variables: {
-      page: parseInt(router.query?.page as any) || 1,
-      perPage: parseInt(router.query?.perPage as any) || 10,
-    },
+    variables,
   });
   const [orderDelete] = useOrderDeleteMutation({
     notifications: {
@@ -21,6 +27,34 @@ export function OrderList() {
   });
 
   useOrderUpdateSubscription();
+
+  // awaiting https://github.com/apollographql/apollo-client/pull/5909
+  // for simlification the following code
+  useOrderDeleteSubscription({
+    onSubscriptionData: ({ client, subscriptionData }) => {
+      const _id = subscriptionData?.data?.orderRemoved;
+      if (!_id) return;
+
+      const data = client.readQuery({
+        query: OrderListQueryDocument,
+        variables,
+      });
+      const newData = {
+        viewer: {
+          ...data?.viewer,
+          orderPagination: {
+            ...data?.viewer?.orderPagination,
+            items: data?.viewer?.orderPagination?.items?.filter((t) => t._id !== _id),
+          },
+        },
+      };
+      client.writeQuery({
+        query: OrderListQueryDocument,
+        variables,
+        data: newData,
+      });
+    },
+  });
 
   function onChange(pagination: PaginationConfig) {
     router.push({
