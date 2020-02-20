@@ -11,14 +11,16 @@
     "generate": "graphql-codegen",
     "watch-generate": "graphql-codegen --watch",
     "watch": "npm run clear && concurrently -k npm:watch-generate npm:dev",
-    "clear": "find ./src -name \"__generated__\" -exec rm -rf '{}' +"
+    "clear": "find ./src -name \"__generated__\" -exec rm -rf '{}' +",
+    "check": "npm-check -uE"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.0.0-beta.33",
-    "@apollo/react-ssr": "^4.0.0-beta.1",
+    "@apollo/client": "3.0.0-beta.36",
+    "@apollo/link-ws": "2.0.0-beta.3",
+    "@apollo/react-ssr": "4.0.0-beta.1",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "antd": "^3.26.9",
@@ -27,7 +29,8 @@
     "next": "^9.2.1",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.12.2",
@@ -47,6 +50,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "npm-check": "^5.9.0",
     "prettier": "^1.19.1",
     "typescript": "^3.7.5"
   }

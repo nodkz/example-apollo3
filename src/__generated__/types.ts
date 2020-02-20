@@ -1772,6 +1772,13 @@ export enum SortRemoveOneProductInput {
   NameSupplieridDesc = 'NAME__SUPPLIERID_DESC'
 }
 
+export type Subscription = {
+   __typename?: 'Subscription',
+  orderCreated?: Maybe<Order>,
+  orderUpdated?: Maybe<Order>,
+  orderRemoved?: Maybe<Scalars['MongoID']>,
+};
+
 export type Supplier = {
    __typename?: 'Supplier',
   /** Supplier unique ID */

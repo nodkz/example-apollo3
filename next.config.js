@@ -8,7 +8,8 @@ module.exports = withCss(
   withSass({
     /* config options here */
     publicRuntimeConfig: {
-      APP_GRAPHQL_URL: 'https://graphql-compose.herokuapp.com/northwind/',
+      APP_GRAPHQL_URL: 'https://graphql-compose.herokuapp.com/northwind',
+      APP_GRAPHQL_WS: 'wss://graphql-compose.herokuapp.com/northwind',
     },
     cssModules: false,
     cssLoaderOptions: {},

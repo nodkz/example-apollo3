@@ -4,6 +4,7 @@ import { Table, Popconfirm } from 'antd';
 import { PaginationConfig } from 'antd/lib/table';
 import { useRouter } from 'next/router';
 import { OrderListEditableFreight } from './OrderListEditableFreight';
+import { useOrderUpdateSubscription } from './__generated__/OrderUpdateSubscription';
 
 export function OrderList() {
   const router = useRouter();
@@ -18,6 +19,8 @@ export function OrderList() {
       onCompleted: 'Запись успешно удалена!',
     },
   });
+
+  useOrderUpdateSubscription();
 
   function onChange(pagination: PaginationConfig) {
     router.push({

@@ -1,0 +1,8 @@
+subscription OrderUpdateSubscription {
+  orderUpdated {
+    _id
+    orderID
+    freight
+    ...OrderRow_order
+  }
+}

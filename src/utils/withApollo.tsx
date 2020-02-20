@@ -9,9 +9,13 @@ import {
   from,
   HttpLink,
   HttpOptions,
+  split,
 } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
 import fetch from 'isomorphic-unfetch';
 import { getConfig } from './getConfig';
+import { WebSocketLink } from '@apollo/link-ws';
+
 // import { redirectToAuth } from '../helpers/redirectToAuth';
 // import { Observable } from 'apollo-client/util/Observable';
 
@@ -156,7 +160,7 @@ function createApolloClient(
 ) {
   const linkOptions: HttpOptions = {
     uri: getConfig('APP_GRAPHQL_URL'),
-    credentials: 'include',
+    credentials: 'same-origin', // 'include',
     fetch: customFetch,
   };
   if (headers) linkOptions.headers = headers;
@@ -182,9 +186,36 @@ function createApolloClient(
   //   return;
   // });
 
+  let combinedTransportLink: any = httpLink;
+
+  // use websocket only in browser
+  if (typeof window !== 'undefined') {
+    const wsLink = new WebSocketLink({
+      uri: getConfig('APP_GRAPHQL_WS'),
+      options: {
+        reconnect: true,
+      },
+    });
+
+    combinedTransportLink = split(
+      // split based on operation type
+      ({ query }) => {
+        const definition = getMainDefinition(query);
+        return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+      },
+      wsLink,
+      httpLink
+    );
+  }
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: from([/*redirectUnauthorizedLink,*/ httpLink]),
+    link: from([
+      // redirectUnauthorizedLink,
+      // httpLink,
+      combinedTransportLink,
+    ]),
     cache: new InMemoryCache(cacheConfig).restore(initialState),
+    connectToDevTools: true,
   });
 }

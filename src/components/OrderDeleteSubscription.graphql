@@ -1,0 +1,8 @@
+
+# Not realized yet
+# Awaiting 
+# see https://github.com/apollographql/apollo-client/pull/5909
+
+subscription OrderDeleteSubscription {
+  orderRemoved
+}
