@@ -15,6 +15,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import fetch from 'isomorphic-unfetch';
 import { getConfig } from './getConfig';
 import { WebSocketLink } from '@apollo/link-ws';
+import clientMockSchema from './clientMockSchema';
 
 // import { redirectToAuth } from '../helpers/redirectToAuth';
 // import { Observable } from 'apollo-client/util/Observable';
@@ -217,5 +218,6 @@ function createApolloClient(
     ]),
     cache: new InMemoryCache(cacheConfig).restore(initialState),
     connectToDevTools: true,
+    ...clientMockSchema,
   });
 }

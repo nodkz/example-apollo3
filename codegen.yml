@@ -1,4 +1,6 @@
-schema: schema.graphql
+schema: 
+  - schema.graphql
+  - './src/utils/clientMockSchema.ts'
 documents: 'src/**/*.graphql'
 generates:
   src/__generated__/types.ts:
