@@ -1,7 +1,7 @@
 import './OrderList.scss';
-import { Icon } from 'antd';
 import { useState } from 'react';
 import { useOrderEditMutation } from './__generated__/OrderEditMutation';
+import { LoadingOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 interface Props {
   record: { freight?: number; _id: string };
@@ -40,21 +40,17 @@ export function OrderListEditableFreight({ record }: Props) {
           disabled={loading}
         />
         {loading ? (
-          <Icon type="loading" />
+          <LoadingOutlined />
         ) : (
           <>
-            <Icon
-              type="check-circle"
-              theme="twoTone"
+            <CheckCircleOutlined
               twoToneColor="#52c41a"
               onClick={() => save()}
-            ></Icon>
-            <Icon
-              type="close-circle"
-              theme="twoTone"
+            ></CheckCircleOutlined>
+            <CloseCircleOutlined
               twoToneColor="#eb2f96"
               onClick={toggleEditable}
-            ></Icon>
+            ></CloseCircleOutlined>
           </>
         )}
       </div>
