@@ -2,8 +2,8 @@
 // 🛑 In this repo I keep generated files only for demo purposes!
 import * as Types from '../../__generated__/types';
 
-import { OrderRow_order } from './OrderListQuery';
-import gql from 'graphql-tag';
+import { OrderList_item } from './OrderList_item';
+import { DocumentNode } from 'graphql';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from 'app/utils/apolloHooks';
 
@@ -17,21 +17,12 @@ export type OrderUpdateSubscription = (
   & { orderUpdated?: Types.Maybe<(
     { __typename: 'Order' }
     & Pick<Types.Order, '_id' | 'orderID' | 'freight'>
-    & OrderRow_order
+    & OrderList_item
   )> }
 );
 
 
-export const OrderUpdateSubscriptionDocument = gql`
-    subscription OrderUpdateSubscription {
-  orderUpdated {
-    _id
-    orderID
-    freight
-    ...OrderRow_order
-  }
-}
-    ${OrderRow_order}`;
+export const OrderUpdateSubscriptionDocument: DocumentNode = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"OrderUpdateSubscription"},"variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderUpdated"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"orderID"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"freight"},"arguments":[],"directives":[]},{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrderList_item"},"directives":[]}]}}]}},...OrderList_item.definitions]};
 
 /**
  * __useOrderUpdateSubscription__

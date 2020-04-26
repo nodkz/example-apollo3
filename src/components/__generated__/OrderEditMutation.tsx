@@ -2,7 +2,7 @@
 // 🛑 In this repo I keep generated files only for demo purposes!
 import * as Types from '../../__generated__/types';
 
-import gql from 'graphql-tag';
+import { DocumentNode } from 'graphql';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from 'app/utils/apolloHooks';
 
@@ -25,17 +25,7 @@ export type OrderEditMutation = (
 );
 
 
-export const OrderEditMutationDocument = gql`
-    mutation OrderEditMutation($record: UpdateByIdOrderInput!) {
-  updateOrder(record: $record) {
-    record {
-      __typename
-      orderID
-      freight
-    }
-  }
-}
-    `;
+export const OrderEditMutationDocument: DocumentNode = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"OrderEditMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"record"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateByIdOrderInput"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"record"},"value":{"kind":"Variable","name":{"kind":"Name","value":"record"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"record"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderID"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"freight"},"arguments":[],"directives":[]}]}}]}}]}}]};
 export type OrderEditMutationMutationFn = ApolloReactCommon.MutationFunction<OrderEditMutation, OrderEditMutationVariables>;
 
 /**

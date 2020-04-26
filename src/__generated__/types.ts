@@ -36,6 +36,7 @@ export type Order = {
   shipVia?: Maybe<Scalars['Float']>;
   shippedDate?: Maybe<Scalars['Date']>;
   shipper?: Maybe<Shipper>;
+  time?: Maybe<Scalars['String']>;
 };
 
 export type _IdOperatorsFilterFindManyCategoryInput = {

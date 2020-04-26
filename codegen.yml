@@ -17,6 +17,7 @@ generates:
       - typescript-operations
       - typescript-react-apollo
     config:
+      documentMode: 'documentNodeImportFragments'
       namingConvention: keep
       nonOptionalTypename: true
       dedupeOperationSuffix: true

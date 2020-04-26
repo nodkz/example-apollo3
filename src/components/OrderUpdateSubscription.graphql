@@ -3,6 +3,6 @@ subscription OrderUpdateSubscription {
     _id
     orderID
     freight
-    ...OrderRow_order
+    ...OrderList_item
   }
 }

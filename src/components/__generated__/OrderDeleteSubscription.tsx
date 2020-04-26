@@ -2,7 +2,7 @@
 // 🛑 In this repo I keep generated files only for demo purposes!
 import * as Types from '../../__generated__/types';
 
-import gql from 'graphql-tag';
+import { DocumentNode } from 'graphql';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from 'app/utils/apolloHooks';
 
@@ -17,11 +17,7 @@ export type OrderDeleteSubscription = (
 );
 
 
-export const OrderDeleteSubscriptionDocument = gql`
-    subscription OrderDeleteSubscription {
-  orderRemoved
-}
-    `;
+export const OrderDeleteSubscriptionDocument: DocumentNode = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"OrderDeleteSubscription"},"variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderRemoved"},"arguments":[],"directives":[]}]}}]};
 
 /**
  * __useOrderDeleteSubscription__

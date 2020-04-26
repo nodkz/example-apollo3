@@ -2,7 +2,8 @@
 // 🛑 In this repo I keep generated files only for demo purposes!
 import * as Types from '../../__generated__/types';
 
-import gql from 'graphql-tag';
+import { OrderList_item } from './OrderList_item';
+import { DocumentNode } from 'graphql';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from 'app/utils/apolloHooks';
 
@@ -30,92 +31,15 @@ export type OrderList_pagination = (
   & Pick<Types.OrderPagination, 'count'>
   & { items?: Types.Maybe<Array<Types.Maybe<(
     { __typename: 'Order' }
-    & OrderRow_order
+    & OrderList_item
   )>>>, pageInfo: (
     { __typename: 'PaginationInfo' }
     & Pick<Types.PaginationInfo, 'pageCount' | 'currentPage' | 'perPage'>
   ) }
 );
 
-export type OrderRow_order = (
-  { __typename: 'Order' }
-  & Pick<Types.Order, '_id' | 'orderID' | 'orderDate' | 'customerID' | 'employeeID' | 'freight'>
-  & { employee?: Types.Maybe<(
-    { __typename: 'Employee' }
-    & Pick<Types.Employee, 'firstName' | 'lastName' | 'birthDate'>
-  )>, customer?: Types.Maybe<(
-    { __typename: 'Customer' }
-    & Customer_data
-  )> }
-);
-
-export type Customer_data = (
-  { __typename: 'Customer' }
-  & Pick<Types.Customer, 'companyName'>
-  & { address?: Types.Maybe<(
-    { __typename: 'CustomerAddress' }
-    & Pick<Types.CustomerAddress, 'city'>
-  )> }
-);
-
-export const Customer_data = gql`
-    fragment Customer_data on Customer {
-  companyName
-  address {
-    city
-    __typename
-  }
-  __typename
-}
-    `;
-export const OrderRow_order = gql`
-    fragment OrderRow_order on Order {
-  _id
-  orderID
-  orderDate
-  customerID
-  employeeID
-  employee {
-    firstName
-    lastName
-    birthDate
-    __typename
-  }
-  customer {
-    ...Customer_data
-    __typename
-  }
-  freight
-  __typename
-}
-    ${Customer_data}`;
-export const OrderList_pagination = gql`
-    fragment OrderList_pagination on OrderPagination {
-  count
-  items {
-    ...OrderRow_order
-    __typename
-  }
-  pageInfo {
-    pageCount
-    currentPage
-    perPage
-    __typename
-  }
-  __typename
-}
-    ${OrderRow_order}`;
-export const OrderListQueryDocument = gql`
-    query OrderListQuery($page: Int!, $perPage: Int!) {
-  viewer {
-    orderPagination(page: $page, perPage: $perPage) {
-      ...OrderList_pagination
-      __typename
-    }
-    __typename
-  }
-}
-    ${OrderList_pagination}`;
+export const OrderList_pagination: DocumentNode = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"OrderList_pagination"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"OrderPagination"}},"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"items"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrderList_item"},"directives":[]}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pageCount"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"currentPage"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"perPage"},"arguments":[],"directives":[]}]}}]}},...OrderList_item.definitions]};
+export const OrderListQueryDocument: DocumentNode = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"OrderListQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"perPage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderPagination"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}},{"kind":"Argument","name":{"kind":"Name","value":"perPage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"perPage"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"OrderList_pagination"},"directives":[]}]}}]}}]}},...OrderList_pagination.definitions]};
 
 /**
  * __useOrderListQuery__

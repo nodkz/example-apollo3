@@ -1,7 +1,6 @@
 mutation OrderEditMutation($record: UpdateByIdOrderInput!) {
   updateOrder(record: $record) {
     record {
-      __typename
       orderID
       freight
     }

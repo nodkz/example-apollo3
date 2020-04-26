@@ -2,7 +2,7 @@
 // 🛑 In this repo I keep generated files only for demo purposes!
 import * as Types from '../../__generated__/types';
 
-import gql from 'graphql-tag';
+import { DocumentNode } from 'graphql';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from 'app/utils/apolloHooks';
 
@@ -25,15 +25,7 @@ export type OrderDeleteMutation = (
 );
 
 
-export const OrderDeleteMutationDocument = gql`
-    mutation OrderDeleteMutation($filter: FilterRemoveOneOrderInput!) {
-  removeOrder(filter: $filter) {
-    record {
-      orderID
-    }
-  }
-}
-    `;
+export const OrderDeleteMutationDocument: DocumentNode = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"OrderDeleteMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"FilterRemoveOneOrderInput"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"removeOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"record"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderID"},"arguments":[],"directives":[]}]}}]}}]}}]};
 export type OrderDeleteMutationMutationFn = ApolloReactCommon.MutationFunction<OrderDeleteMutation, OrderDeleteMutationVariables>;
 
 /**

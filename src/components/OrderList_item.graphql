@@ -1,0 +1,23 @@
+fragment OrderList_item on Order {
+  _id
+  orderID
+  orderDate
+  customerID
+  employeeID
+  employee {
+    firstName
+    lastName
+    birthDate
+  }
+  customer {
+    ...Customer_data
+  }
+  freight
+}
+
+fragment Customer_data on Customer {
+  companyName
+  address {
+    city
+  }
+}

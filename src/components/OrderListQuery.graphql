@@ -2,52 +2,18 @@ query OrderListQuery($page: Int!, $perPage: Int!) {
   viewer {
     orderPagination(page: $page, perPage: $perPage) {
       ...OrderList_pagination
-      __typename
     }
-    __typename
   }
 }
 
 fragment OrderList_pagination on OrderPagination {
   count
   items {
-    ...OrderRow_order
-    __typename
+    ...OrderList_item
   }
   pageInfo {
     pageCount
     currentPage
     perPage
-    __typename
   }
-  __typename
-}
-
-fragment OrderRow_order on Order {
-  _id
-  orderID
-  orderDate
-  customerID
-  employeeID
-  employee {
-    firstName
-    lastName
-    birthDate
-    __typename
-  }
-  customer {
-    ...Customer_data
-    __typename
-  }
-  freight
-  __typename
-}
-
-fragment Customer_data on Customer {
-  companyName
-  address {
-    city
-    __typename
-  }
-  __typename
 }

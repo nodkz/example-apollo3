@@ -1,8 +1,4 @@
-import {
-  useOrderListQuery,
-  OrderRow_order,
-  OrderListQueryDocument,
-} from './__generated__/OrderListQuery';
+import { useOrderListQuery, OrderListQueryDocument } from './__generated__/OrderListQuery';
 import { useOrderDeleteMutation } from './__generated__/OrderDeleteMutation';
 import { Table, Popconfirm } from 'antd';
 import { PaginationConfig } from 'antd/lib/pagination';
@@ -10,6 +6,7 @@ import { useRouter } from 'next/router';
 import { OrderListEditableFreight } from './OrderListEditableFreight';
 import { useOrderUpdateSubscription } from './__generated__/OrderUpdateSubscription';
 import { useOrderDeleteSubscription } from './__generated__/OrderDeleteSubscription';
+import { OrderList_item } from './__generated__/OrderList_item';
 
 export function OrderList() {
   const router = useRouter();
@@ -66,12 +63,12 @@ export function OrderList() {
     });
   }
 
-  function expandedRowRender(record: OrderRow_order) {
+  function expandedRowRender(record: OrderList_item) {
     return <div>{JSON.stringify(record)}</div>;
   }
 
   return (
-    <Table<OrderRow_order>
+    <Table<OrderList_item>
       loading={loading}
       dataSource={data?.viewer?.orderPagination?.items || []}
       pagination={{
