@@ -1,60 +1,64 @@
+// 🛑 NOTICE: __generated__ folders should be added to .gitignore
+// 🛑 In this repo I keep generated files only for demo purposes!
 import * as Types from '../../__generated__/types';
 
 import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from 'app/utils/apolloHooks';
 
+
+
 export type OrderListQueryVariables = {
-  page: Types.Scalars['Int'],
-  perPage: Types.Scalars['Int']
+  page: Types.Scalars['Int'];
+  perPage: Types.Scalars['Int'];
 };
 
 
 export type OrderListQuery = (
   { __typename: 'Query' }
-  & { viewer: Types.Maybe<(
+  & { viewer?: Types.Maybe<(
     { __typename: 'Viewer' }
-    & { orderPagination: Types.Maybe<(
+    & { orderPagination?: Types.Maybe<(
       { __typename: 'OrderPagination' }
-      & OrderList_paginationFragment
+      & OrderList_pagination
     )> }
   )> }
 );
 
-export type OrderList_paginationFragment = (
+export type OrderList_pagination = (
   { __typename: 'OrderPagination' }
   & Pick<Types.OrderPagination, 'count'>
-  & { items: Types.Maybe<Array<Types.Maybe<(
+  & { items?: Types.Maybe<Array<Types.Maybe<(
     { __typename: 'Order' }
-    & OrderRow_orderFragment
+    & OrderRow_order
   )>>>, pageInfo: (
     { __typename: 'PaginationInfo' }
     & Pick<Types.PaginationInfo, 'pageCount' | 'currentPage' | 'perPage'>
   ) }
 );
 
-export type OrderRow_orderFragment = (
+export type OrderRow_order = (
   { __typename: 'Order' }
   & Pick<Types.Order, '_id' | 'orderID' | 'orderDate' | 'customerID' | 'employeeID' | 'freight'>
-  & { employee: Types.Maybe<(
+  & { employee?: Types.Maybe<(
     { __typename: 'Employee' }
     & Pick<Types.Employee, 'firstName' | 'lastName' | 'birthDate'>
-  )>, customer: Types.Maybe<(
+  )>, customer?: Types.Maybe<(
     { __typename: 'Customer' }
-    & Customer_dataFragment
+    & Customer_data
   )> }
 );
 
-export type Customer_dataFragment = (
+export type Customer_data = (
   { __typename: 'Customer' }
   & Pick<Types.Customer, 'companyName'>
-  & { address: Types.Maybe<(
+  & { address?: Types.Maybe<(
     { __typename: 'CustomerAddress' }
     & Pick<Types.CustomerAddress, 'city'>
   )> }
 );
 
-export const Customer_dataFragmentDoc = gql`
+export const Customer_data = gql`
     fragment Customer_data on Customer {
   companyName
   address {
@@ -64,7 +68,7 @@ export const Customer_dataFragmentDoc = gql`
   __typename
 }
     `;
-export const OrderRow_orderFragmentDoc = gql`
+export const OrderRow_order = gql`
     fragment OrderRow_order on Order {
   _id
   orderID
@@ -84,8 +88,8 @@ export const OrderRow_orderFragmentDoc = gql`
   freight
   __typename
 }
-    ${Customer_dataFragmentDoc}`;
-export const OrderList_paginationFragmentDoc = gql`
+    ${Customer_data}`;
+export const OrderList_pagination = gql`
     fragment OrderList_pagination on OrderPagination {
   count
   items {
@@ -100,7 +104,7 @@ export const OrderList_paginationFragmentDoc = gql`
   }
   __typename
 }
-    ${OrderRow_orderFragmentDoc}`;
+    ${OrderRow_order}`;
 export const OrderListQueryDocument = gql`
     query OrderListQuery($page: Int!, $perPage: Int!) {
   viewer {
@@ -111,13 +115,13 @@ export const OrderListQueryDocument = gql`
     __typename
   }
 }
-    ${OrderList_paginationFragmentDoc}`;
+    ${OrderList_pagination}`;
 
 /**
  * __useOrderListQuery__
  *
  * To run a query within a React component, call `useOrderListQuery` and pass it any options that fit your needs.
- * When your component renders, `useOrderListQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useOrderListQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;

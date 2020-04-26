@@ -10,6 +10,8 @@ generates:
       extension: .tsx
       baseTypesPath: __generated__/types.ts
     plugins:
+      - add: '// 🛑 NOTICE: __generated__ folders should be added to .gitignore'
+      - add: '// 🛑 In this repo I keep generated files only for demo purposes!'
       - typescript-operations
       - typescript-react-apollo
     config:

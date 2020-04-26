@@ -1,19 +1,23 @@
+// 🛑 NOTICE: __generated__ folders should be added to .gitignore
+// 🛑 In this repo I keep generated files only for demo purposes!
 import * as Types from '../../__generated__/types';
 
 import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from 'app/utils/apolloHooks';
 
+
+
 export type OrderEditMutationVariables = {
-  record: Types.UpdateByIdOrderInput
+  record: Types.UpdateByIdOrderInput;
 };
 
 
 export type OrderEditMutation = (
   { __typename: 'Mutation' }
-  & { updateOrder: Types.Maybe<(
+  & { updateOrder?: Types.Maybe<(
     { __typename: 'UpdateByIdOrderPayload' }
-    & { record: Types.Maybe<(
+    & { record?: Types.Maybe<(
       { __typename: 'Order' }
       & Pick<Types.Order, 'orderID' | 'freight'>
     )> }

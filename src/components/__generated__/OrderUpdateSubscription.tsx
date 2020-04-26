@@ -1,9 +1,12 @@
+// 🛑 NOTICE: __generated__ folders should be added to .gitignore
+// 🛑 In this repo I keep generated files only for demo purposes!
 import * as Types from '../../__generated__/types';
 
-import { OrderRow_orderFragmentDoc, OrderRow_orderFragment } from './OrderListQuery';
+import { OrderRow_order } from './OrderListQuery';
 import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/client';
 import * as ApolloReactHooks from 'app/utils/apolloHooks';
+
 
 
 export type OrderUpdateSubscriptionVariables = {};
@@ -11,10 +14,10 @@ export type OrderUpdateSubscriptionVariables = {};
 
 export type OrderUpdateSubscription = (
   { __typename: 'Subscription' }
-  & { orderUpdated: Types.Maybe<(
+  & { orderUpdated?: Types.Maybe<(
     { __typename: 'Order' }
     & Pick<Types.Order, '_id' | 'orderID' | 'freight'>
-    & OrderRow_orderFragment
+    & OrderRow_order
   )> }
 );
 
@@ -28,13 +31,13 @@ export const OrderUpdateSubscriptionDocument = gql`
     ...OrderRow_order
   }
 }
-    ${OrderRow_orderFragmentDoc}`;
+    ${OrderRow_order}`;
 
 /**
  * __useOrderUpdateSubscription__
  *
  * To run a query within a React component, call `useOrderUpdateSubscription` and pass it any options that fit your needs.
- * When your component renders, `useOrderUpdateSubscription` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useOrderUpdateSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;

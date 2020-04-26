@@ -1,11 +1,11 @@
 import {
   useOrderListQuery,
-  OrderRow_orderFragment,
+  OrderRow_order,
   OrderListQueryDocument,
 } from './__generated__/OrderListQuery';
 import { useOrderDeleteMutation } from './__generated__/OrderDeleteMutation';
 import { Table, Popconfirm } from 'antd';
-import { PaginationConfig } from 'antd/lib/table';
+import { PaginationConfig } from 'antd/lib/pagination';
 import { useRouter } from 'next/router';
 import { OrderListEditableFreight } from './OrderListEditableFreight';
 import { useOrderUpdateSubscription } from './__generated__/OrderUpdateSubscription';
@@ -66,12 +66,12 @@ export function OrderList() {
     });
   }
 
-  function expandedRowRender(record: OrderRow_orderFragment) {
+  function expandedRowRender(record: OrderRow_order) {
     return <div>{JSON.stringify(record)}</div>;
   }
 
   return (
-    <Table<OrderRow_orderFragment>
+    <Table<OrderRow_order>
       loading={loading}
       dataSource={data?.viewer?.orderPagination?.items || []}
       pagination={{
