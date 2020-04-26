@@ -69,7 +69,7 @@ export default function App({ Component, pageProps }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              API
+              API ⤴︎
             </a>
           </Menu.Item>
         </Menu>
