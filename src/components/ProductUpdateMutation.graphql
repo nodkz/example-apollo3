@@ -1,0 +1,8 @@
+mutation ProductUpdate($record: UpdateByIdProductInput!) {
+  updateProduct(record: $record) {
+    recordId
+    record {
+      name
+    }
+  }
+}
