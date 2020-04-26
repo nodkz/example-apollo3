@@ -42,6 +42,11 @@ export default function App({ Component, pageProps }) {
               <a>Orders</a>
             </Link>
           </Menu.Item>
+          <Menu.Item key="/raw-client">
+            <Link href="/raw-client">
+              <a>ApolloClient</a>
+            </Link>
+          </Menu.Item>
           <Menu.Item key="/mock">
             <Link href="/mock">
               <a>Mock</a>
