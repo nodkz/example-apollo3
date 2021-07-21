@@ -29,10 +29,10 @@ export type OrderListQuery = (
 export type OrderList_pagination = (
   { __typename: 'OrderPagination' }
   & Pick<Types.OrderPagination, 'count'>
-  & { items?: Types.Maybe<Array<Types.Maybe<(
+  & { items?: Types.Maybe<Array<(
     { __typename: 'Order' }
     & OrderList_item
-  )>>>, pageInfo: (
+  )>>, pageInfo: (
     { __typename: 'PaginationInfo' }
     & Pick<Types.PaginationInfo, 'pageCount' | 'currentPage' | 'perPage'>
   ) }

@@ -17,8 +17,8 @@ export function OrderListEditableFreight({ record }: Props) {
 
   const [save, { loading }] = useOrderEditMutation({
     variables: {
+      _id: record._id,
       record: {
-        _id: record._id,
         freight: parseFloat(freight),
       },
     },

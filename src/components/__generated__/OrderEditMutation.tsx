@@ -9,6 +9,7 @@ import * as ApolloReactHooks from 'app/utils/apolloHooks';
 
 
 export type OrderEditMutationVariables = {
+  _id: Types.Scalars['MongoID'];
   record: Types.UpdateByIdOrderInput;
 };
 
@@ -25,7 +26,7 @@ export type OrderEditMutation = (
 );
 
 
-export const OrderEditMutationDocument: DocumentNode = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"OrderEditMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"record"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateByIdOrderInput"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"record"},"value":{"kind":"Variable","name":{"kind":"Name","value":"record"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"record"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderID"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"freight"},"arguments":[],"directives":[]}]}}]}}]}}]};
+export const OrderEditMutationDocument: DocumentNode = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"OrderEditMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"MongoID"}}},"directives":[]},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"record"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateByIdOrderInput"}}},"directives":[]}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_id"}}},{"kind":"Argument","name":{"kind":"Name","value":"record"},"value":{"kind":"Variable","name":{"kind":"Name","value":"record"}}}],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"record"},"arguments":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderID"},"arguments":[],"directives":[]},{"kind":"Field","name":{"kind":"Name","value":"freight"},"arguments":[],"directives":[]}]}}]}}]}}]};
 export type OrderEditMutationMutationFn = ApolloReactCommon.MutationFunction<OrderEditMutation, OrderEditMutationVariables>;
 
 /**
@@ -41,6 +42,7 @@ export type OrderEditMutationMutationFn = ApolloReactCommon.MutationFunction<Ord
  * @example
  * const [orderEditMutation, { data, loading, error }] = useOrderEditMutation({
  *   variables: {
+ *      _id: // value for '_id'
  *      record: // value for 'record'
  *   },
  * });

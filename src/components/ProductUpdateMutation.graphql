@@ -1,5 +1,5 @@
-mutation ProductUpdate($record: UpdateByIdProductInput!) {
-  updateProduct(record: $record) {
+mutation ProductUpdate($_id: MongoID! $record: UpdateByIdProductInput!) {
+  updateProduct(_id: $_id, record: $record) {
     recordId
     record {
       name

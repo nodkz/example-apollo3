@@ -1,0 +1,8 @@
+schema:
+  - 'https://graphql-compose.herokuapp.com/northwind':
+generates:
+  schema.graphql:
+    plugins:
+      - schema-ast
+    config:
+      includeDirectives: true

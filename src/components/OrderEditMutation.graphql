@@ -1,5 +1,5 @@
-mutation OrderEditMutation($record: UpdateByIdOrderInput!) {
-  updateOrder(record: $record) {
+mutation OrderEditMutation($_id: MongoID! $record: UpdateByIdOrderInput!) {
+  updateOrder(_id: $_id, record: $record) {
     record {
       orderID
       freight

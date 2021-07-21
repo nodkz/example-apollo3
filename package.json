@@ -12,7 +12,8 @@
     "watch-generate": "graphql-codegen --watch",
     "watch": "npm run clear && concurrently -k npm:watch-generate npm:dev",
     "clear": "find ./src -name \"__generated__\" -exec rm -rf '{}' +",
-    "check": "npm-check -uE"
+    "check": "npm-check -uE",
+    "update-schema": "graphql-codegen -c ./codegen.download.yml"
   },
   "keywords": [],
   "author": "",
@@ -37,6 +38,7 @@
     "@graphql-codegen/add": "^1.13.3",
     "@graphql-codegen/cli": "1.13.3",
     "@graphql-codegen/near-operation-file-preset": "1.13.3",
+    "@graphql-codegen/schema-ast": "^1.18.3",
     "@graphql-codegen/typescript": "1.13.3",
     "@graphql-codegen/typescript-operations": "1.13.3",
     "@graphql-codegen/typescript-react-apollo": "1.13.3",
