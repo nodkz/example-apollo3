@@ -1,4 +1,3 @@
-/* eslint-disable graphql/template-strings */
 import gql from 'graphql-tag';
 
 export default {

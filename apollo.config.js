@@ -1,3 +1,6 @@
+// For vscode extension:
+// https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo
+
 module.exports = {
   client: {
     service: {

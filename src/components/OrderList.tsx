@@ -26,7 +26,7 @@ export function OrderList() {
   useOrderUpdateSubscription();
 
   // awaiting https://github.com/apollographql/apollo-client/pull/5909
-  // for simlification the following code
+  // for simplification the following code
   useOrderDeleteSubscription({
     onSubscriptionData: ({ client, subscriptionData }) => {
       const _id = subscriptionData?.data?.orderRemoved;
@@ -53,7 +53,7 @@ export function OrderList() {
     },
   });
 
-  function onChange(pagination: PaginationConfig) {
+  function onPageChange(pagination: PaginationConfig) {
     router.push({
       pathname: router.pathname,
       query: {
@@ -77,7 +77,7 @@ export function OrderList() {
         showSizeChanger: true,
         total: data?.viewer?.orderPagination?.count || 0,
       }}
-      onChange={onChange}
+      onChange={onPageChange}
       expandedRowRender={expandedRowRender}
       rowKey="orderID"
       rowClassName={() => 'editable-row'}

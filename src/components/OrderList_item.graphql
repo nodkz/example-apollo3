@@ -8,6 +8,9 @@ fragment OrderList_item on Order {
     firstName
     lastName
     birthDate
+    address {
+      street
+    }
   }
   customer {
     ...Customer_data

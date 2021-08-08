@@ -4,12 +4,12 @@ const path = require('path');
 
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'prettier', 'graphql', 'react', 'react-hooks'],
+  plugins: ['@typescript-eslint', 'prettier', 'react', 'react-hooks'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
   ],
   parserOptions: {
     sourceType: 'module',
@@ -17,13 +17,13 @@ module.exports = {
     project: [path.resolve(__dirname, 'tsconfig.eslint.json')],
     ecmaVersion: 2018,
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: 'detect',
+    },
   },
   rules: {
     'no-underscore-dangle': 0,
@@ -39,8 +39,8 @@ module.exports = {
         objects: 'always-multiline',
         imports: 'always-multiline',
         exports: 'always-multiline',
-        functions: 'ignore'
-      }
+        functions: 'ignore',
+      },
     ],
     'no-prototype-builtins': 0,
     'prefer-destructuring': 0,
@@ -56,61 +56,30 @@ module.exports = {
         args: 'after-used',
         ignoreRestSiblings: true,
         caughtErrors: 'none',
-        argsIgnorePattern: '^(_|doc$|req$|res$|next$|props$|params$|opts$|e$)'
-      }
+        argsIgnorePattern: '^(_|doc$|req$|res$|next$|props$|params$|opts$|e$)',
+      },
     ],
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/camelcase': 0,
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-var-requires': 0,
-    ///////////  CLIENT  ////////////////
-    'graphql/template-strings': [
-      'error',
-      {
-        // env: 'apollo',
-        validators: [
-          'ExecutableDefinitions',
-          'UniqueOperationNames',
-          'LoneAnonymousOperation',
-          'SingleFieldSubscriptions',
-          'KnownTypeNames',
-          'FragmentsOnCompositeTypes',
-          'VariablesAreInputTypes',
-          'ScalarLeafs',
-          'FieldsOnCorrectType',
-          'UniqueFragmentNames',
-          // 'KnownFragmentNames',
-          // 'NoUnusedFragments',
-          'PossibleFragmentSpreads',
-          'NoFragmentCycles',
-          'UniqueVariableNames',
-          'NoUndefinedVariables',
-          // 'NoUnusedVariables',
-          'KnownDirectives',
-          'UniqueDirectivesPerLocation',
-          'KnownArgumentNames',
-          'UniqueArgumentNames',
-          'ValuesOfCorrectType',
-          'ProvidedRequiredArguments',
-          'VariablesInAllowedPosition',
-          'OverlappingFieldsCanBeMerged',
-          'UniqueInputFieldNames'
-        ],
-        tagName: 'gql',
-        schemaString: fs.readFileSync(path.resolve(__dirname, './schema.graphql'), 'utf8')
-      }
-    ],
     'react/display-name': 0,
     'react/react-in-jsx-scope': 0,
     'react/no-children-prop': 0,
     'react/prop-types': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    'react-hooks/rules-of-hooks': 0
+    'react-hooks/rules-of-hooks': 0,
   },
-  env: {
-    jasmine: true,
-    jest: true
-  }
+  overrides: [
+    {
+      files: ['*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      plugins: ['@graphql-eslint'],
+      rules: {
+        'prettier/prettier': [2, { parser: 'graphql' }],
+      },
+    },
+  ],
 };
