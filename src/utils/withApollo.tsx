@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Head from 'next/head';
 import { NextComponentType, NextPageContext } from 'next';
 import {
   ApolloProvider,
@@ -27,9 +26,9 @@ const customFetch = (uri: string, options: any) => {
 
 const cacheConfig = {
   typePolicies: {
-    Order: {
-      keyFields: ['orderID'],
-    },
+    // Order: {
+    //   keyFields: ['orderID'],
+    // },
     // Employee: {
     //   keyFields: false, // ['_id', 'firstName'],
     // },
@@ -116,7 +115,7 @@ export function withApollo(PageComponent: NextComponentType<any, any, any>, { ss
 
           // getDataFromTree does not call componentWillUnmount
           // head side effect therefore need to be cleared manually
-          Head.rewind();
+          // Head.rewind();
         }
       }
 
@@ -172,16 +171,16 @@ function createApolloClient(
   //     // Handle apollo-server's AuthenticationError in graphql response
   //     if (graphQLErrors.some((e: any) => e?.extensions?.code === 'UNAUTHENTICATED')) {
   //       redirectToAuth(ctx);
-  //       // return empty answer for hidding any errors of body parsing in `getDataFromTree`
+  //       // return empty answer for hiding any errors of body parsing in `getDataFromTree`
   //       return Observable.of();
   //     }
   //     return;
   //   }
 
-  //   // Handle any 401 http response, no matter what response was recieved
+  //   // Handle any 401 http response, no matter what response was received
   //   if ((networkError as any)?.statusCode === 401) {
   //     redirectToAuth(ctx);
-  //     // return empty answer for hidding any errors of body parsing in `getDataFromTree`
+  //     // return empty answer for hiding any errors of body parsing in `getDataFromTree`
   //     return Observable.of();
   //   }
   //   return;
@@ -204,7 +203,7 @@ function createApolloClient(
         const definition = getMainDefinition(query);
         return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
       },
-      wsLink,
+      wsLink as any,
       httpLink
     );
   }
@@ -217,7 +216,7 @@ function createApolloClient(
       combinedTransportLink,
     ]),
     cache: new InMemoryCache(cacheConfig).restore(initialState),
-    connectToDevTools: true,
+    connectToDevTools: process.env.NODE_ENV !== 'production',
     ...clientMockSchema,
   });
 }

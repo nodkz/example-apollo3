@@ -2,3 +2,5 @@ node_modules
 dist
 lib
 __generated__
+.eslintrc.js
+schema.graphql

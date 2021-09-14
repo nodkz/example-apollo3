@@ -1,4 +1,3 @@
-import './OrderList.scss';
 import { useState } from 'react';
 import { useOrderEditMutation } from './__generated__/OrderEditMutation';
 import { LoadingOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';

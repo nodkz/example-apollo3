@@ -1,12 +1,12 @@
+import { useRouter } from 'next/router';
+import { Table, Popconfirm } from 'antd';
+import { TablePaginationConfig } from 'antd/lib/table';
+import { OrderListEditableFreight } from './OrderListEditableFreight';
 import { useOrderListQuery, OrderListQueryDocument } from './__generated__/OrderListQuery';
 import { useOrderDeleteMutation } from './__generated__/OrderDeleteMutation';
-import { Table, Popconfirm } from 'antd';
-import { PaginationConfig } from 'antd/lib/pagination';
-import { useRouter } from 'next/router';
-import { OrderListEditableFreight } from './OrderListEditableFreight';
 import { useOrderUpdateSubscription } from './__generated__/OrderUpdateSubscription';
 import { useOrderDeleteSubscription } from './__generated__/OrderDeleteSubscription';
-import { OrderList_item } from './__generated__/OrderList_item';
+import { OrderListItem } from './__generated__/OrderListItem.fragment';
 
 export function OrderList() {
   const router = useRouter();
@@ -14,13 +14,32 @@ export function OrderList() {
     page: parseInt(router.query?.page as any) || 1,
     perPage: parseInt(router.query?.perPage as any) || 10,
   };
-  const { loading, data, refetch } = useOrderListQuery({
+  console.log(variables);
+  const { loading, data } = useOrderListQuery({
     variables,
+    // fetchPolicy: 'cache-first', // used for first execution
+    // nextFetchPolicy: 'cache-only', // is used for all other rerenders
   });
+
   const [orderDelete] = useOrderDeleteMutation({
     notifications: {
       onCompleted: 'Запись успешно удалена!',
     },
+
+    // ----- 3 ways of updating Queries
+    refetchQueries: [OrderListQueryDocument], // <-- Better, because may avoid multiple rerender if you use `update` property
+    // onCompleted: () => refetch(), // const { refetch } = useOrderListQuery();
+    // update(cache, { data }) {
+    //   // See https://www.apollographql.com/docs/react/data/mutations/#the-update-function
+    //   cache.modify({
+    //     fields: {
+    //       viewer(viewerData) {
+    //         // ...
+    //         return viewerData;
+    //       },
+    //     },
+    //   });
+    // },
   });
 
   useOrderUpdateSubscription();
@@ -29,8 +48,8 @@ export function OrderList() {
   // for simplification the following code
   useOrderDeleteSubscription({
     onSubscriptionData: ({ client, subscriptionData }) => {
-      const _id = subscriptionData?.data?.orderRemoved;
-      if (!_id) return;
+      const idToRemove = subscriptionData?.data?.orderRemoved;
+      if (!idToRemove) return;
 
       const data = client.readQuery({
         query: OrderListQueryDocument,
@@ -41,7 +60,7 @@ export function OrderList() {
           ...data?.viewer,
           orderPagination: {
             ...data?.viewer?.orderPagination,
-            items: data?.viewer?.orderPagination?.items?.filter((t) => t._id !== _id),
+            items: data?.viewer?.orderPagination?.items?.filter((t) => t._id !== idToRemove),
           },
         },
       };
@@ -53,7 +72,7 @@ export function OrderList() {
     },
   });
 
-  function onPageChange(pagination: PaginationConfig) {
+  function onPageChange(pagination: TablePaginationConfig) {
     router.push({
       pathname: router.pathname,
       query: {
@@ -63,12 +82,12 @@ export function OrderList() {
     });
   }
 
-  function expandedRowRender(record: OrderList_item) {
+  function expandedRowRender(record: OrderListItem) {
     return <div>{JSON.stringify(record)}</div>;
   }
 
   return (
-    <Table<OrderList_item>
+    <Table<OrderListItem>
       loading={loading}
       dataSource={data?.viewer?.orderPagination?.items || []}
       pagination={{
@@ -114,11 +133,10 @@ export function OrderList() {
             return (
               <Popconfirm
                 title="Sure to delete?"
-                onConfirm={async () => {
-                  await orderDelete({
+                onConfirm={() => {
+                  orderDelete({
                     variables: { filter: { orderID: record.orderID } },
                   });
-                  refetch();
                 }}
               >
                 <a>Delete</a>

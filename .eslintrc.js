@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const fs = require('fs');
 const path = require('path');
 
 module.exports = {
@@ -7,7 +5,6 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier', 'react', 'react-hooks'],
   extends: [
     'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
   ],
@@ -47,8 +44,9 @@ module.exports = {
     'no-else-return': 0,
     'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
     '@typescript-eslint/explicit-member-accessibility': 0,
-    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
@@ -79,6 +77,37 @@ module.exports = {
       plugins: ['@graphql-eslint'],
       rules: {
         'prettier/prettier': [2, { parser: 'graphql' }],
+        '@graphql-eslint/avoid-duplicate-fields': 'error',
+        '@graphql-eslint/executable-definitions': 'error',
+        '@graphql-eslint/fields-on-correct-type': 'error',
+        '@graphql-eslint/fragments-on-composite-type': 'error',
+        '@graphql-eslint/known-argument-names': 'error',
+        '@graphql-eslint/known-directives': 'error',
+        '@graphql-eslint/known-type-names': 'error',
+        '@graphql-eslint/no-anonymous-operations': 'error',
+        '@graphql-eslint/no-deprecated': 'warn',
+        '@graphql-eslint/no-unused-variables': 'warn',
+        '@graphql-eslint/provided-required-arguments': 'error',
+        '@graphql-eslint/scalar-leafs': 'error',
+        '@graphql-eslint/unique-argument-names': 'error',
+        '@graphql-eslint/unique-input-field-names': 'error',
+        '@graphql-eslint/unique-variable-names': 'error',
+        '@graphql-eslint/value-literals-of-correct-type': 'error',
+        '@graphql-eslint/variables-are-input-types': 'error',
+        '@graphql-eslint/variables-in-allowed-position': 'error',
+        '@graphql-eslint/match-document-filename': [
+          'error',
+          {
+            fileExtension: '.graphql',
+            query: 'PascalCase',
+            mutation: 'PascalCase',
+            subscription: 'PascalCase',
+            fragment: { style: 'PascalCase', suffix: '.fragment' },
+          },
+        ],
+        // TODO: try the following rules later (they didn't work in August 2021)
+        // '@graphql-eslint/unique-fragment-name': 'error',
+        // '@graphql-eslint/unique-operation-name': 'error',
       },
     },
   ],

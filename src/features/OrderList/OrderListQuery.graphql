@@ -1,15 +1,15 @@
 query OrderListQuery($page: Int!, $perPage: Int!) {
   viewer {
     orderPagination(page: $page, perPage: $perPage) {
-      ...OrderList_pagination
+      ...OrderListPagination
     }
   }
 }
 
-fragment OrderList_pagination on OrderPagination {
+fragment OrderListPagination on OrderPagination {
   count
   items {
-    ...OrderList_item
+    ...OrderListItem
   }
   pageInfo {
     pageCount

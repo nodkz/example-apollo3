@@ -2,11 +2,13 @@ import 'antd/dist/antd.css';
 import { Layout, Menu, notification } from 'antd';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { initApolloClient } from 'app/utils/withApollo';
+import '../styles.scss';
 
 const { Header, Content, Footer } = Layout;
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const router = useRouter();
 
   function clearCache() {
@@ -83,3 +85,10 @@ export default function App({ Component, pageProps }) {
     </Layout>
   );
 }
+
+// Disable SSR
+// it helps to fix warnings in antd@4.16.x with rc-overflow component
+// @see https://github.com/ant-design/ant-design/issues/30396#issuecomment-916674374
+export default dynamic(() => Promise.resolve(App), {
+  ssr: false,
+});

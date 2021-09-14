@@ -1,23 +1,18 @@
 // 🛑 NOTICE: __generated__ folders should be added to .gitignore
 // 🛑 In this repo I keep generated files only for demo purposes!
-import * as Types from '../../__generated__/types';
+import * as Types from '../../../__generated__/types';
 
 import { DocumentNode } from 'graphql';
-import * as ApolloReactCommon from '@apollo/client';
-import * as ApolloReactHooks from 'app/utils/apolloHooks';
+import * as Apollo from '@apollo/client';
+import * as ApolloReactHooks from 'app/utils/extendApolloHooks';
+const defaultOptions =  {}
+export type OrderDeleteSubscriptionVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-
-export type OrderDeleteSubscriptionVariables = {};
-
-
-export type OrderDeleteSubscription = (
-  { __typename: 'Subscription' }
-  & Pick<Types.Subscription, 'orderRemoved'>
-);
+export type OrderDeleteSubscription = { __typename: 'Subscription', orderRemoved?: Types.Maybe<any> };
 
 
-export const OrderDeleteSubscriptionDocument: DocumentNode = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"OrderDeleteSubscription"},"variableDefinitions":[],"directives":[],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderRemoved"},"arguments":[],"directives":[]}]}}]};
+export const OrderDeleteSubscriptionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"OrderDeleteSubscription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderRemoved"}}]}}]} as unknown as DocumentNode;
 
 /**
  * __useOrderDeleteSubscription__
@@ -35,7 +30,8 @@ export const OrderDeleteSubscriptionDocument: DocumentNode = {"kind":"Document",
  * });
  */
 export function useOrderDeleteSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OrderDeleteSubscription, OrderDeleteSubscriptionVariables>) {
-        return ApolloReactHooks.useSubscription<OrderDeleteSubscription, OrderDeleteSubscriptionVariables>(OrderDeleteSubscriptionDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useSubscription<OrderDeleteSubscription, OrderDeleteSubscriptionVariables>(OrderDeleteSubscriptionDocument, options);
       }
 export type OrderDeleteSubscriptionHookResult = ReturnType<typeof useOrderDeleteSubscription>;
-export type OrderDeleteSubscriptionSubscriptionResult = ApolloReactCommon.SubscriptionResult<OrderDeleteSubscription>;
+export type OrderDeleteSubscriptionSubscriptionResult = Apollo.SubscriptionResult<OrderDeleteSubscription>;

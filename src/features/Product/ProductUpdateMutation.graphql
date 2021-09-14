@@ -1,4 +1,4 @@
-mutation ProductUpdate($_id: MongoID!, $record: UpdateByIdProductInput!) {
+mutation ProductUpdateMutation($_id: MongoID!, $record: UpdateByIdProductInput!) {
   updateProduct(_id: $_id, record: $record) {
     recordId
     record {

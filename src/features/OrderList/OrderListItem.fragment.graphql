@@ -1,4 +1,4 @@
-fragment OrderList_item on Order {
+fragment OrderListItem on Order {
   _id
   orderID
   orderDate

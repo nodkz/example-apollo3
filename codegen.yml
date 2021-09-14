@@ -4,7 +4,14 @@ schema:
 documents: 'src/**/*.graphql'
 generates:
   src/__generated__/types.ts:
-    - typescript
+    plugins:
+      - typescript
+    config:
+      scalars:
+        Date: "string"
+        RegExpAsString: "string"
+        MongoID: "string"
+        BSONDecimal: "string"
   src/:
     preset: near-operation-file
     presetConfig:
@@ -12,8 +19,10 @@ generates:
       extension: .tsx
       baseTypesPath: __generated__/types.ts
     plugins:
-      - add: '// 🛑 NOTICE: __generated__ folders should be added to .gitignore'
-      - add: '// 🛑 In this repo I keep generated files only for demo purposes!'
+      - add: 
+          content: 
+            - '// 🛑 NOTICE: __generated__ folders should be added to .gitignore'
+            - '// 🛑 In this repo I keep generated files only for demo purposes!'
       - typescript-operations
       - typescript-react-apollo
     config:
@@ -26,5 +35,5 @@ generates:
       withHooks: true
       withHOC: false
       reactApolloVersion: 3
-      apolloReactHooksImportFrom: 'app/utils/apolloHooks'
+      apolloReactHooksImportFrom: 'app/utils/extendApolloHooks'
       # documentMode: documentNode

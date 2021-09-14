@@ -5,12 +5,16 @@ module.exports = {
   projects: {
     app: {
       schema: ['schema.graphql'],
-      documents: ['**/*.graphql'],
+      documents: ['src/**/*.graphql'],
       extensions: {
         endpoints: {
           default: {
             url: 'https://graphql-compose.herokuapp.com/northwind',
           },
+        },
+        languageService: {
+          // skip generated_schema.graphql file with GoTo definition
+          useSchemaFileDefinitions: true,
         },
       },
     },
