@@ -44,6 +44,11 @@ function App({ Component, pageProps }) {
               <a>Orders</a>
             </Link>
           </Menu.Item>
+          <Menu.Item key="/products">
+            <Link href="/products">
+              <a>Products</a>
+            </Link>
+          </Menu.Item>
           <Menu.Item key="/raw-client">
             <Link href="/raw-client">
               <a>ApolloClient</a>

@@ -107,11 +107,11 @@ export function OrderList() {
         },
         {
           title: 'Customer',
-          dataIndex: 'customer.companyName',
+          dataIndex: ['customer', 'companyName'],
         },
         {
           title: 'City',
-          dataIndex: 'customer.address.city',
+          dataIndex: ['customer', 'address', 'city'],
         },
         {
           title: 'Order date',

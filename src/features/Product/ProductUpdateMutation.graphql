@@ -1,8 +1,0 @@
-mutation ProductUpdateMutation($_id: MongoID!, $record: UpdateByIdProductInput!) {
-  updateProduct(_id: $_id, record: $record) {
-    recordId
-    record {
-      name
-    }
-  }
-}
