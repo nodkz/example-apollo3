@@ -1,11 +1,19 @@
-query ProductListQuery {
+query ProductListQuery($page: Int!, $perPage: Int!) {
   viewer {
-    productList {
-      productID
-      name
-      unitPrice
-      supplier {
-        companyName
+    productPagination(page: $page, perPage: $perPage) {
+      pageInfo {
+        pageCount
+        perPage
+        currentPage
+      }
+      count
+      items {
+        productID
+        name
+        unitPrice
+        supplier {
+          companyName
+        }
       }
     }
   }

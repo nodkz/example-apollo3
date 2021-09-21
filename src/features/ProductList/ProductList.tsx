@@ -10,13 +10,15 @@ export function ProductList() {
     perPage: parseInt(router.query?.perPage as any) || 5,
   };
 
-  const { data, loading } = useProductListQuery();
+  const { data, loading } = useProductListQuery({
+    variables,
+  });
 
   return (
     <Table
       title={() => <h1>Implement ProductList logic like in Orders</h1>}
       loading={loading}
-      dataSource={data?.viewer?.productList || []}
+      dataSource={data?.viewer?.productPagination?.items || []}
       columns={[
         {
           title: 'ProductID',
@@ -57,10 +59,10 @@ export function ProductList() {
       ]}
       pagination={{
         showSizeChanger: true,
-        pageSize: variables.perPage,
-        current: variables.page,
+        pageSize: data?.viewer?.productPagination?.pageInfo?.perPage,
+        current: data?.viewer?.productPagination?.pageInfo?.currentPage,
         pageSizeOptions: ['5', '10', '100'],
-        total: 100, // TODO: from graphql response
+        total: data?.viewer?.productPagination?.count,
       }}
       onChange={(pagination: TablePaginationConfig) => {
         router.push({
