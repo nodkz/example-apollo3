@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { Table, Popconfirm } from 'antd';
 import { TablePaginationConfig } from 'antd/lib/table';
+import { useProductListQuery } from './__generated__/ProductListQuery';
 
 export function ProductList() {
   const router = useRouter();
@@ -8,13 +9,14 @@ export function ProductList() {
     page: parseInt(router.query?.page as any) || 1,
     perPage: parseInt(router.query?.perPage as any) || 5,
   };
-  const loading = false;
+
+  const { data, loading } = useProductListQuery();
 
   return (
     <Table
-      title={() => <h1>TODO: Implement ProductList logic like in Orders</h1>}
+      title={() => <h1>Implement ProductList logic like in Orders</h1>}
       loading={loading}
-      dataSource={[]}
+      dataSource={data?.viewer?.productList || []}
       columns={[
         {
           title: 'ProductID',

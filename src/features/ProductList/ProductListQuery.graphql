@@ -1,0 +1,12 @@
+query ProductListQuery {
+  viewer {
+    productList {
+      productID
+      name
+      unitPrice
+      supplier {
+        companyName
+      }
+    }
+  }
+}
