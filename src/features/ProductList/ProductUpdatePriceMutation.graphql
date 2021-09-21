@@ -1,0 +1,8 @@
+mutation ProductUpdatePriceMutation($id: MongoID!, $newPrice: Float!) {
+  updateProduct(_id: $id, record: { unitPrice: $newPrice }) {
+    record {
+      _id
+      unitPrice
+    }
+  }
+}

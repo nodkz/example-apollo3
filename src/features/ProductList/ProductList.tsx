@@ -8,6 +8,8 @@ import {
 } from './__generated__/ProductListQuery';
 import { useProductDeleteMutation } from './__generated__/ProductDeleteMutation';
 import { useProductDeleteSubscription } from './__generated__/ProductDeleteSubscription';
+import { useProductUpdatePriceMutation } from './__generated__/ProductUpdatePriceMutation';
+import { useProductUpdateSubscription } from './__generated__/ProductUpdateSubscription';
 
 export function ProductList() {
   const router = useRouter();
@@ -40,6 +42,13 @@ export function ProductList() {
     },
   });
 
+  const [updatePrice] = useProductUpdatePriceMutation({
+    notifications: {
+      onCompleted: 'Инфляция!',
+    },
+  });
+  useProductUpdateSubscription();
+
   return (
     <Table<ProductTableItem>
       title={() => <h1>Implement ProductList logic like in Orders</h1>}
@@ -62,7 +71,15 @@ export function ProductList() {
           title: 'Unit Price',
           dataIndex: 'unitPrice',
           render: (unitPrice, _record) => {
-            return unitPrice;
+            return (
+              <div
+                onClick={() =>
+                  updatePrice({ variables: { id: _record?._id, newPrice: unitPrice + 1 } })
+                }
+              >
+                {unitPrice}
+              </div>
+            );
             // return <OrderListEditableFreight record={record} />;
           },
         },
