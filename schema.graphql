@@ -1,5 +1,3 @@
-directive @connection(key: String!, filter: [String!]) on FIELD
-
 type Category {
   _id: MongoID!
 
@@ -1839,9 +1837,13 @@ enum SortRemoveOneProductInput {
 }
 
 type Subscription {
+  employeeUpdated: Employee
   orderCreated: Order
   orderRemoved: MongoID
   orderUpdated: Order
+  productCreated: Product
+  productRemoved: MongoID
+  productUpdated: Product
 }
 
 type Supplier {

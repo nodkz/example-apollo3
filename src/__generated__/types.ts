@@ -1792,9 +1792,13 @@ export enum SortRemoveOneProductInput {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  employeeUpdated?: Maybe<Employee>;
   orderCreated?: Maybe<Order>;
   orderRemoved?: Maybe<Scalars['MongoID']>;
   orderUpdated?: Maybe<Order>;
+  productCreated?: Maybe<Product>;
+  productRemoved?: Maybe<Scalars['MongoID']>;
+  productUpdated?: Maybe<Product>;
 };
 
 export type Supplier = {

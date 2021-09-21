@@ -7,6 +7,7 @@ import {
   useProductListQuery,
 } from './__generated__/ProductListQuery';
 import { useProductDeleteMutation } from './__generated__/ProductDeleteMutation';
+import { useProductDeleteSubscription } from './__generated__/ProductDeleteSubscription';
 
 export function ProductList() {
   const router = useRouter();
@@ -26,6 +27,16 @@ export function ProductList() {
     // refetchQueries: [ProductListQueryDocument],
     onCompleted: () => {
       refetch();
+    },
+  });
+
+  useProductDeleteSubscription({
+    onSubscriptionData({ client, subscriptionData }) {
+      const _id = subscriptionData?.data?.productRemoved;
+      if (_id) {
+        const ref = client.cache.identify({ __typename: 'Product', _id });
+        client.cache.evict({ id: ref });
+      }
     },
   });
 
