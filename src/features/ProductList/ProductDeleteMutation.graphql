@@ -1,0 +1,5 @@
+mutation ProductDeleteMutation($_id: MongoID!) {
+  removeProduct(filter: { _id: $_id }) {
+    recordId
+  }
+}

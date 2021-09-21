@@ -1,7 +1,12 @@
 import { useRouter } from 'next/router';
 import { Table, Popconfirm } from 'antd';
 import { TablePaginationConfig } from 'antd/lib/table';
-import { useProductListQuery } from './__generated__/ProductListQuery';
+import {
+  // ProductListQueryDocument,
+  ProductTableItem,
+  useProductListQuery,
+} from './__generated__/ProductListQuery';
+import { useProductDeleteMutation } from './__generated__/ProductDeleteMutation';
 
 export function ProductList() {
   const router = useRouter();
@@ -10,12 +15,22 @@ export function ProductList() {
     perPage: parseInt(router.query?.perPage as any) || 5,
   };
 
-  const { data, loading } = useProductListQuery({
+  const { data, loading, refetch } = useProductListQuery({
     variables,
   });
 
+  const [deleteProduct] = useProductDeleteMutation({
+    notifications: {
+      onCompleted: 'Запись успешно удалена!',
+    },
+    // refetchQueries: [ProductListQueryDocument],
+    onCompleted: () => {
+      refetch();
+    },
+  });
+
   return (
-    <Table
+    <Table<ProductTableItem>
       title={() => <h1>Implement ProductList logic like in Orders</h1>}
       loading={loading}
       dataSource={data?.viewer?.productPagination?.items || []}
@@ -43,12 +58,14 @@ export function ProductList() {
         {
           title: 'Operations',
           width: '150px',
-          render: (_t, _record) => {
+          render: (t, record) => {
             return (
               <Popconfirm
                 title="Sure to delete?"
                 onConfirm={() => {
-                  alert('run delete mutation');
+                  deleteProduct({
+                    variables: { _id: record?._id },
+                  });
                 }}
               >
                 <a>Delete</a>

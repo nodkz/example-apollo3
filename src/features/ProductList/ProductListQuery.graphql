@@ -8,13 +8,18 @@ query ProductListQuery($page: Int!, $perPage: Int!) {
       }
       count
       items {
-        productID
-        name
-        unitPrice
-        supplier {
-          companyName
-        }
+        ...ProductTableItem
       }
     }
+  }
+}
+
+fragment ProductTableItem on Product {
+  _id
+  productID
+  name
+  unitPrice
+  supplier {
+    companyName
   }
 }
