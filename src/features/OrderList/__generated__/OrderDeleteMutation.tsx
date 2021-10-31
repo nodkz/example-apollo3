@@ -11,7 +11,7 @@ export type OrderDeleteMutationVariables = Types.Exact<{
 }>;
 
 
-export type OrderDeleteMutation = { __typename: 'Mutation', removeOrder?: Types.Maybe<{ __typename: 'RemoveOneOrderPayload', record?: Types.Maybe<{ __typename: 'Order', _id: any, orderID?: Types.Maybe<number> }> }> };
+export type OrderDeleteMutation = { __typename: 'Mutation', removeOrder?: { __typename: 'RemoveOneOrderPayload', record?: { __typename: 'Order', _id: any, orderID?: number | null | undefined } | null | undefined } | null | undefined };
 
 
 export const OrderDeleteMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"OrderDeleteMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"filter"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"FilterRemoveOneOrderInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"removeOrder"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"Variable","name":{"kind":"Name","value":"filter"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"record"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"orderID"}}]}}]}}]}}]} as unknown as DocumentNode;

@@ -14,7 +14,6 @@ export function OrderList() {
     page: parseInt(router.query?.page as any) || 1,
     perPage: parseInt(router.query?.perPage as any) || 10,
   };
-  console.log(variables);
   const { loading, data } = useOrderListQuery({
     variables,
     // fetchPolicy: 'cache-first', // used for first execution

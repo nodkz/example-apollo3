@@ -9,7 +9,7 @@ const defaultOptions =  {}
 export type OrderDeleteSubscriptionVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type OrderDeleteSubscription = { __typename: 'Subscription', orderRemoved?: Types.Maybe<any> };
+export type OrderDeleteSubscription = { __typename: 'Subscription', orderRemoved?: any | null | undefined };
 
 
 export const OrderDeleteSubscriptionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"OrderDeleteSubscription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"orderRemoved"}}]}}]} as unknown as DocumentNode;
