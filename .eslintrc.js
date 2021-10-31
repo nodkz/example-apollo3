@@ -99,9 +99,9 @@ module.exports = {
           'error',
           {
             fileExtension: '.graphql',
-            query: 'PascalCase',
-            mutation: 'PascalCase',
-            subscription: 'PascalCase',
+            query: { style: 'PascalCase', suffix: '.query' },
+            mutation: { style: 'PascalCase', suffix: '.mutation' },
+            subscription: { style: 'PascalCase', suffix: '.subscription' },
             fragment: { style: 'PascalCase', suffix: '.fragment' },
           },
         ],
